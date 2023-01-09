@@ -13,15 +13,12 @@
 
 .table_row {
   border: 1px solid black;
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
 }
 
 .title {
   font-size: 20px;
   color: black;
-  padding: 15px;
+  padding: 10px;
 }
 
 .btn {
@@ -32,7 +29,6 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 120px;
 }
 
 .inputfile {
@@ -41,11 +37,4 @@
 
 .table_data {
   text-align: center;
-  width: 300px;
 }
-
-.custom-class > * { 
-  background-color:black !important;
-  /* height: 12px !important;  */
-}
-.custom-class{background-color:grey !important;}
