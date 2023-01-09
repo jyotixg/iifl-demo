@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './App.css';
 
 
-const FirstComponent = () => {
+const Dashboard = () => {
     const inputFile1 = useRef();
     const inputFile2 = useRef();
     const inputFile3 = useRef();
@@ -363,4 +363,4 @@ const FirstComponent = () => {
     )
 }
 
-export default FirstComponent
+export default Dashboard

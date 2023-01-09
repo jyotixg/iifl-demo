@@ -1,5 +1,5 @@
 import './App.css';
-import FirstComponent from './FirstComponent';
+import Dashboard from './Dashboard';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <FirstComponent />
+      <Dashboard />
       <Footer />
     </div>
   );
