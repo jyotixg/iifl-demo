@@ -1,4 +1,4 @@
-.main {
+/* .main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,9 +13,6 @@
 
 .table_row {
   border: 1px solid black;
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
 }
 
 .title {
@@ -46,6 +43,45 @@
 
 .custom-class > * { 
   background-color:black !important;
-  /* height: 12px !important;  */
 }
-.custom-class{background-color:grey !important;}
+.custom-class{background-color:grey !important;} */
+
+.App{
+  /* padding: 20px; */
+  /* border: 1px solid red; */
+  background: #E9EFF3;
+}
+
+.table {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: 1px solid grey; */
+  margin-top: 15px;
+  background-color: #fff;
+}
+
+.title {
+  color: #242056 !important;
+  padding: 15px;
+  font-weight: 900 !important;
+  font-size: 12px !important;
+}
+
+.btn {
+  background: #F26F21 !important;
+  color: white !important;
+  font-size: 10px !important;
+  width: 70%;
+}
+
+.custom-class>* {
+  background-color: #F26F21 !important;
+}
+
+.custom-class {
+  background-color: #242056 !important;
+}
+.MuiSnackbar-anchorOriginTopCenter {
+  top: 150px !important;
+}
