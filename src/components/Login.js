@@ -34,9 +34,9 @@ const Login = () => {
             .then((res) => {
                 setIsLoading(true);
                 setTimeout(() => {
-                    // window.alert("login successfull");
+                    window.alert("login successfull");
                     localStorage.setItem('token', res.data.token);
-                    setIsLoading(true);
+                    setIsLoading(false);
                     navigate('/dashboard');
                 }, 3000);
             })
@@ -44,7 +44,6 @@ const Login = () => {
                 console.log(err, "err");
                 setIsLoading(true);
                 setTimeout(() => {
-
                     window.alert("login failed");
                     setIsLoading(false)
                 }, 2000);

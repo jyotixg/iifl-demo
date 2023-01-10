@@ -2,7 +2,6 @@ import { Alert, Box, Button, LinearProgress, Snackbar, Table, TableBody, TableCe
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-// import './App.css';
 import '../App.css';
 
 
