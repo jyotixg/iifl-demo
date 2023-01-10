@@ -13,11 +13,13 @@ const Dashboard = () => {
     const [uploadSuccess, setUploadSuccess] = useState(false);
     const [uploadSuccesAlertOpen, setUploadSuccesAlertOpen] = useState(false);
     const [downloadSuccesAlertOpen, setDownloadSuccesAlertOpen] = useState(false);
-    const [authenticated, setAuthenticated] = useState(true);
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_BASE_URL;
     const [downloadSuccess, setDownloadSuccess] = useState(false);
-
+    const allowedExtensions = ["csv"];
+    const fileSize = process.env.REACT_APP_FILE_SIZE_LIMIT;
+    const fileSizeData = fileSize / 1000 / 1000;
+   
     useEffect(() => {
         const userToken = localStorage.getItem('token');
 
@@ -25,7 +27,6 @@ const Dashboard = () => {
             navigate('/')
         }
     }, [])
-
 
     const UploadSuccesAlertClose = (event, reason) => {
         setUploadSuccesAlertOpen(false);
@@ -121,9 +122,6 @@ const Dashboard = () => {
         "Content-Type": "multipart/form-data",
     }
 
-    const allowedExtensions = ["csv"];
-    const fileSize = process.env.REACT_APP_FILE_SIZE_LIMIT;
-    const fileSizeData = fileSize / 1000 / 1000;
     const nseResponseFileHandler = (e) => {
         const inputFile = e.target.files[0];
         const fileExtension = inputFile?.type.split("/")[1];
@@ -136,16 +134,16 @@ const Dashboard = () => {
             alert(`Please upload file less than ${fileSizeData} mb`);
         }
         else {
-            axios.post(`${baseUrl}api/users`, formData, {
+            axios.post(`${baseUrl}/api/users`, formData, {
                 onUploadProgress: (data) => {
                     setUploaded(Math.round((data.loaded / data.total) * 100))
                 }
             }, { headers: headers })
                 .then((res) => {
-                    e.target.value = null;
                     console.log(res.data);
                     setUploadSuccess(true);
                     setUploadSuccesAlertOpen(true);
+                    e.target.value = null;
                 })
                 .catch((err) => {
                     console.log(err);
@@ -168,16 +166,16 @@ const Dashboard = () => {
             alert("Please upload file less than 50 mb");
         }
         else {
-            axios.post(`${baseUrl}api/users`, formData, {
+            axios.post(`${baseUrl}/api/users`, formData, {
                 onUploadProgress: (data) => {
                     setUploaded(Math.round((data.loaded / data.total) * 100))
                 }
             }, { headers: headers })
                 .then((res) => {
-                    e.target.value = null;
                     console.log(res.data);
                     setUploadSuccess(true);
                     setUploadSuccesAlertOpen(true);
+                    e.target.value = null;
                 })
                 .catch((err) => {
                     console.log(err);
@@ -200,16 +198,16 @@ const Dashboard = () => {
             alert("Please upload file less than 50 mb");
         }
         else {
-            axios.post(`${baseUrl}api/users`, formData, {
+            axios.post(`${baseUrl}/api/users`, formData, {
                 onUploadProgress: (data) => {
                     setUploaded(Math.round((data.loaded / data.total) * 100))
                 }
             }, { headers: headers })
                 .then((res) => {
-                    e.target.value = null;
                     console.log(res.data);
                     setUploadSuccess(true);
                     setUploadSuccesAlertOpen(true);
+                    e.target.value = null;
                 })
                 .catch((err) => {
                     console.log(err);

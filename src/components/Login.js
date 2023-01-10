@@ -69,6 +69,12 @@ const Login = () => {
                 <form onSubmit={loginHandler} className="form" >
                     <FormControl sx={{ m: 1, width: '25ch' }} >
                         <TextField
+                            inputProps={{
+                                autocomplete: 'new-password',
+                                form: {
+                                    autocomplete: 'off',
+                                },
+                            }}
                             label="Email"
                             name="email"
                             type="email"
