@@ -15,6 +15,7 @@ const Dashboard = () => {
     const [open, setOpen] = React.useState(false);
     const [authenticated, setAuthenticated] = useState(true);
     const navigate = useNavigate();
+    const baseUrl = process.env.REACT_APP_BASE_URL;
 
     useEffect(() => {
         const userToken = localStorage.getItem('token');
@@ -37,7 +38,7 @@ const Dashboard = () => {
     };
 
     const nseTransactionBtn = () => {
-        axios.get('https://reqres.in/api/users?page=2')
+        axios.get(`${baseUrl}api/users?page=2`)
             .then((res) => {
                 console.log(res.data.data);
             })
@@ -47,7 +48,7 @@ const Dashboard = () => {
     }
 
     const transactionDataBtn1 = () => {
-        axios.get('https://reqres.in/api/users/1')
+        axios.get(`${baseUrl}api/users/1`)
             .then((res) => {
                 console.log(res.data.data);
             })
@@ -57,7 +58,7 @@ const Dashboard = () => {
     }
 
     const transactionDataBtn2 = () => {
-        axios.get('https://reqres.in/api/unknown/2')
+        axios.get(`${baseUrl}api/unknown/2`)
             .then((res) => {
                 console.log(res.data.data);
             })
@@ -67,7 +68,7 @@ const Dashboard = () => {
     }
 
     const utrConfirmationBtn = () => {
-        axios.get('https://reqres.in/api/users?page=2')
+        axios.get(`${baseUrl}api/users?page=2`)
             .then((res) => {
                 console.log(res.data.data);
             })
@@ -77,7 +78,7 @@ const Dashboard = () => {
     }
 
     const summaryBtn = () => {
-        axios.get('https://reqres.in/api/users/2')
+        axios.get(`${baseUrl}api/users/2`)
             .then((res) => {
                 console.log(res.data.data);
             })
@@ -116,7 +117,7 @@ const Dashboard = () => {
             alert("Please upload file less than 50 mb");
         }
         else {
-            axios.post('https://reqres.in/api/users', formData, {
+            axios.post(`${baseUrl}api/users`, formData, {
                 onUploadProgress: (data) => {
                     setUploaded(Math.round((data.loaded / data.total) * 100))
                 }
@@ -148,7 +149,7 @@ const Dashboard = () => {
             alert("Please upload file less than 50 mb");
         }
         else {
-            axios.post('https://reqres.in/api/users', formData, {
+            axios.post(`${baseUrl}api/users`, formData, {
                 onUploadProgress: (data) => {
                     setUploaded(Math.round((data.loaded / data.total) * 100))
                 }
@@ -180,7 +181,7 @@ const Dashboard = () => {
             alert("Please upload file less than 50 mb");
         }
         else {
-            axios.post('https://reqres.in/api/users', formData, {
+            axios.post(`${baseUrl}api/users`, formData, {
                 onUploadProgress: (data) => {
                     setUploaded(Math.round((data.loaded / data.total) * 100))
                 }
