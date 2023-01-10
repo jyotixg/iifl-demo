@@ -16,7 +16,7 @@ const Footer = () => {
                 position="fixed"
                 bottom="0"
             >
-                <Typography style={{ color: "#fff", fontSize: "13px", display: "flex", alignItems: "center" }} >	&#169; 2023, Made with
+                <Typography style={{ color: "#fff", fontSize: "13px", display: "flex", alignItems: "center" }} >Made with
                     <Favorite style={{ fill: "red", fontSize: "17px", marginLeft: "6px", marginRight: "6px" }} />
                     by
                     <a href="https://www.texple.com/"
