@@ -12,10 +12,12 @@ const Dashboard = () => {
     const nseScriptFileRef = useRef();
     const [uploaded, setUploaded] = useState(null);
     const [uploadSuccess, setUploadSuccess] = useState(false);
-    const [open, setOpen] = React.useState(false);
+    const [uploadSuccesAlertOpen, setUploadSuccesAlertOpen] = useState(false);
+    const [downloadSuccesAlertOpen, setDownloadSuccesAlertOpen] = useState(false);
     const [authenticated, setAuthenticated] = useState(true);
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_BASE_URL;
+    const [downloadSuccess, setDownloadSuccess] = useState(false);
 
     useEffect(() => {
         const userToken = localStorage.getItem('token');
@@ -25,65 +27,82 @@ const Dashboard = () => {
         }
     }, [])
 
-    const handleClick = () => {
-        setOpen(true);
+
+    const UploadSuccesAlertClose = (event, reason) => {
+        setUploadSuccesAlertOpen(false);
     };
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
+    const downloadSuccesAlertClose = (event, reason) => {
+        setDownloadSuccesAlertOpen(false);
     };
 
     const nseTransactionBtn = () => {
-        axios.get(`${baseUrl}api/users?page=2`)
+        axios.get(`${baseUrl}/api/users?page=2`)
             .then((res) => {
                 console.log(res.data.data);
+                setDownloadSuccess(true);
+                setDownloadSuccesAlertOpen(true);
             })
             .catch((err) => {
                 console.log(err);
+                setDownloadSuccess(false);
+                setDownloadSuccesAlertOpen(true);
             })
     }
 
     const transactionDataBtn1 = () => {
-        axios.get(`${baseUrl}api/users/1`)
+        axios.get(`${baseUrl}/api/users/1`)
             .then((res) => {
                 console.log(res.data.data);
+                setDownloadSuccess(true);
+                setDownloadSuccesAlertOpen(true);
             })
             .catch((err) => {
                 console.log(err);
+                setDownloadSuccess(false);
+                setDownloadSuccesAlertOpen(true);
             })
     }
 
     const transactionDataBtn2 = () => {
-        axios.get(`${baseUrl}api/unknown/2`)
+        axios.get(`${baseUrl}/api/unknown/2`)
             .then((res) => {
                 console.log(res.data.data);
+                setDownloadSuccess(true);
+                setDownloadSuccesAlertOpen(true);
             })
             .catch((err) => {
                 console.log(err);
+                setDownloadSuccess(false);
+                setDownloadSuccesAlertOpen(true);
             })
     }
 
     const utrConfirmationBtn = () => {
-        axios.get(`${baseUrl}api/users?page=2`)
+        axios.get(`${baseUrl}/api/users?page=2`)
             .then((res) => {
                 console.log(res.data.data);
+                setDownloadSuccess(true);
+                setDownloadSuccesAlertOpen(true);
             })
             .catch((err) => {
                 console.log(err);
+                setDownloadSuccess(false);
+                setDownloadSuccesAlertOpen(true);
             })
     }
 
     const summaryBtn = () => {
-        axios.get(`${baseUrl}api/users/2`)
+        axios.get(`${baseUrl}/api/users/2`)
             .then((res) => {
                 console.log(res.data.data);
+                setDownloadSuccess(true);
+                setDownloadSuccesAlertOpen(true);
             })
             .catch((err) => {
                 console.log(err);
+                setDownloadSuccess(false);
+                setDownloadSuccesAlertOpen(true);
             })
     }
 
@@ -104,7 +123,8 @@ const Dashboard = () => {
     }
 
     const allowedExtensions = ["csv"];
-    const fileSize = 20000000;
+    const fileSize = process.env.REACT_APP_FILE_SIZE_LIMIT;
+    const fileSizeData = fileSize / 1000 / 1000;
     const nseResponseFileHandler = (e) => {
         const inputFile = e.target.files[0];
         const fileExtension = inputFile?.type.split("/")[1];
@@ -114,7 +134,7 @@ const Dashboard = () => {
             alert("Please upload only csv files");
         }
         else if (inputFile.size == fileSize || inputFile.size > fileSize) {
-            alert("Please upload file less than 50 mb");
+            alert(`Please upload file less than ${fileSizeData} mb`);
         }
         else {
             axios.post(`${baseUrl}api/users`, formData, {
@@ -126,12 +146,12 @@ const Dashboard = () => {
                     e.target.value = null;
                     console.log(res.data);
                     setUploadSuccess(true);
-                    setOpen(true);
+                    setUploadSuccesAlertOpen(true);
                 })
                 .catch((err) => {
                     console.log(err);
                     setUploadSuccess(false);
-                    setOpen(true);
+                    setUploadSuccesAlertOpen(true);
                 })
         }
 
@@ -158,12 +178,12 @@ const Dashboard = () => {
                     e.target.value = null;
                     console.log(res.data);
                     setUploadSuccess(true);
-                    setOpen(true);
+                    setUploadSuccesAlertOpen(true);
                 })
                 .catch((err) => {
                     console.log(err);
                     setUploadSuccess(false);
-                    setOpen(true);
+                    setUploadSuccesAlertOpen(true);
                 })
         }
 
@@ -190,18 +210,33 @@ const Dashboard = () => {
                     e.target.value = null;
                     console.log(res.data);
                     setUploadSuccess(true);
-                    setOpen(true);
+                    setUploadSuccesAlertOpen(true);
                 })
                 .catch((err) => {
                     console.log(err);
                     setUploadSuccess(false);
-                    setOpen(true);
+                    setUploadSuccesAlertOpen(true);
                 })
         }
     }
 
     return (
         <>
+            {
+                downloadSuccess ?
+                    <Snackbar open={downloadSuccesAlertOpen} autoHideDuration={3000} onClose={downloadSuccesAlertClose}>
+                        <Alert onClose={downloadSuccesAlertClose} severity="success" sx={{ width: '100%' }}>
+                            File downloaded successfully!
+                        </Alert>
+                    </Snackbar>
+                    :
+                    <Snackbar open={downloadSuccesAlertOpen} autoHideDuration={3000} onClose={downloadSuccesAlertClose}>
+                        <Alert onClose={downloadSuccesAlertClose} severity="error" sx={{ width: '100%' }}>
+                            Unable to download file!
+                        </Alert>
+                    </Snackbar>
+            }
+
             {
                 (uploaded > 0 && uploaded < 100) &&
                 <Box marginTop={2} display="flex" width="100%" alignItems="center" justifyContent='center' gap="10px" >
@@ -221,50 +256,16 @@ const Dashboard = () => {
                 </Box>
             }
 
-            {/* {
-                uploadSuccess ?
-                    <div style={{ willChange: "transform" }}>
-                        <Snackbar open={open} autoHideDuration={31000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                                File uploaded successfully!
-                            </Alert>
-                        </Snackbar>
-                    </div>
-                    :
-                    <div style={{ willChange: "transform" }}>
-                        <Snackbar open={open} autoHideDuration={31000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                                Unable to upload file!
-                            </Alert>
-                        </Snackbar>
-                    </div>
-            } */}
-
-            {/* {
-                uploadSuccess ?
-                    <div style={{ border:"1px solid red", width: "30%",  margin: "auto",marginTop: "15px" }} >
-                        <Alert open={open} onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                            File uploaded successfully!
-                        </Alert>
-                    </div>
-                    :
-                    <div style={{ border:"1px solid red", width: "30%",  margin: "auto",marginTop: "15px" }} >
-                        <Alert open={open} onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                            Unable to upload file!
-                        </Alert>
-                    </div>
-            } */}
-
             {
                 uploadSuccess ?
-                    <Snackbar open={open} autoHideDuration={31000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    <Snackbar open={uploadSuccesAlertOpen} autoHideDuration={3000} onClose={UploadSuccesAlertClose}>
+                        <Alert onClose={UploadSuccesAlertClose} severity="success" sx={{ width: '100%' }}>
                             File uploaded successfully!
                         </Alert>
                     </Snackbar>
                     :
-                    <Snackbar open={open} autoHideDuration={31000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    <Snackbar open={uploadSuccesAlertOpen} autoHideDuration={3000} onClose={UploadSuccesAlertClose}>
+                        <Alert onClose={UploadSuccesAlertClose} severity="error" sx={{ width: '100%' }}>
                             Unable to upload file!
                         </Alert>
                     </Snackbar>
