@@ -22,7 +22,7 @@ const Header = () => {
     const navigate = useNavigate();
    
     const logoutHandler = () => {
-        navigate('/login');
+        navigate('/');
         localStorage.removeItem('token');
     }
 

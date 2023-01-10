@@ -22,7 +22,7 @@ const Dashboard = () => {
         const userToken = localStorage.getItem('token');
 
         if (!userToken) {
-            navigate('/login')
+            navigate('/')
         }
     }, [])
 
