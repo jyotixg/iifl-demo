@@ -7,9 +7,9 @@ import '../App.css';
 
 
 const Dashboard = () => {
-    const inputFile1 = useRef();
-    const inputFile2 = useRef();
-    const inputFile3 = useRef();
+    const nseResponseFileRef = useRef();
+    const utrResponseFileRef = useRef();
+    const nseScriptFileRef = useRef();
     const [uploaded, setUploaded] = useState(null);
     const [uploadSuccess, setUploadSuccess] = useState(false);
     const [open, setOpen] = React.useState(false);
@@ -18,7 +18,6 @@ const Dashboard = () => {
 
     useEffect(()=>{
         const userToken = localStorage.getItem('token');
-        console.log(userToken, "userToken");
 
         if(!userToken){
             navigate('/login')
@@ -37,7 +36,7 @@ const Dashboard = () => {
         setOpen(false);
     };
 
-    const btnHandler1 = () => {
+    const nseTransactionBtn = () => {
         axios.get('https://reqres.in/api/users?page=2')
             .then((res) => {
                 console.log(res.data.data);
@@ -47,7 +46,7 @@ const Dashboard = () => {
             })
     }
 
-    const btnHandler2 = () => {
+    const transactionDataBtn1 = () => {
         axios.get('https://reqres.in/api/users/1')
             .then((res) => {
                 console.log(res.data.data);
@@ -57,7 +56,7 @@ const Dashboard = () => {
             })
     }
 
-    const btnHandler3 = () => {
+    const transactionDataBtn2 = () => {
         axios.get('https://reqres.in/api/unknown/2')
             .then((res) => {
                 console.log(res.data.data);
@@ -67,7 +66,7 @@ const Dashboard = () => {
             })
     }
 
-    const btnHandler4 = () => {
+    const utrConfirmationBtn = () => {
         axios.get('https://reqres.in/api/users?page=2')
             .then((res) => {
                 console.log(res.data.data);
@@ -77,7 +76,7 @@ const Dashboard = () => {
             })
     }
 
-    const btnHandler5 = () => {
+    const summaryBtn = () => {
         axios.get('https://reqres.in/api/users/2')
             .then((res) => {
                 console.log(res.data.data);
@@ -87,16 +86,16 @@ const Dashboard = () => {
             })
     }
 
-    const filebtn1 = () => {
-        inputFile1.current.click();
+    const nseResponseBtn = () => {
+        nseResponseFileRef.current.click();
     }
 
-    const filebtn2 = () => {
-        inputFile2.current.click();
+    const utrResponseBtn = () => {
+        utrResponseFileRef.current.click();
     }
 
-    const filebtn3 = () => {
-        inputFile3.current.click();
+    const nseScriptBtn = () => {
+        nseScriptFileRef.current.click();
     }
 
     const headers = {
@@ -105,7 +104,7 @@ const Dashboard = () => {
 
     const allowedExtensions = ["csv"];
     const fileSize = 20000000;
-    const fileHandler1 = (e) => {
+    const nseResponseFileHandler = (e) => {
         const inputFile = e.target.files[0];
         const fileExtension = inputFile?.type.split("/")[1];
         const formData = new FormData();
@@ -137,7 +136,7 @@ const Dashboard = () => {
 
     }
 
-    const fileHandler2 = (e) => {
+    const utrResponseFileHandler = (e) => {
         const inputFile = e.target.files[0];
         const fileExtension = inputFile?.type.split("/")[1];
         const formData = new FormData();
@@ -169,7 +168,7 @@ const Dashboard = () => {
 
     }
 
-    const fileHandler3 = (e) => {
+    const nseScriptFileHandler = (e) => {
         const inputFile = e.target.files[0];
         const fileExtension = inputFile?.type.split("/")[1];
         const formData = new FormData();
@@ -286,7 +285,7 @@ const Dashboard = () => {
                                     NSE Transaction
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={btnHandler1} className="btn" >Download</Button>
+                                    <Button onClick={nseTransactionBtn} className="btn" >Download</Button>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -294,13 +293,13 @@ const Dashboard = () => {
                                     NSE Response
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={filebtn1} className="btn" >Upload</Button>
+                                    <Button onClick={nseResponseBtn} className="btn" >Upload</Button>
                                     <input
-                                        ref={inputFile1}
+                                        ref={nseResponseFileRef}
                                         type="file"
                                         accept=".csv"
                                         style={{ display: "none" }}
-                                        onChange={fileHandler1}
+                                        onChange={nseResponseFileHandler}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -309,7 +308,7 @@ const Dashboard = () => {
                                     Transaction data in custody format-1
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={btnHandler2} className="btn" >Download</Button>
+                                    <Button onClick={transactionDataBtn1} className="btn" >Download</Button>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -317,7 +316,7 @@ const Dashboard = () => {
                                     Transaction data in custody format-2
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={btnHandler3} className="btn">Download</Button>
+                                    <Button onClick={transactionDataBtn2} className="btn">Download</Button>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -325,13 +324,13 @@ const Dashboard = () => {
                                     UTR Response from custody
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={filebtn2} className="btn" >Upload</Button>
+                                    <Button onClick={utrResponseBtn} className="btn" >Upload</Button>
                                     <input
-                                        ref={inputFile2}
+                                        ref={utrResponseFileRef}
                                         type="file"
                                         accept=".csv"
                                         style={{ display: "none" }}
-                                        onChange={fileHandler2}
+                                        onChange={utrResponseFileHandler}
                                     />
                                 </TableCell>
 
@@ -341,7 +340,7 @@ const Dashboard = () => {
                                     UTR confirmation NSE
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={btnHandler4} className="btn" >Download</Button>
+                                    <Button onClick={utrConfirmationBtn} className="btn" >Download</Button>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -349,13 +348,13 @@ const Dashboard = () => {
                                     NSE Script master
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={filebtn3} className="btn" >Upload</Button>
+                                    <Button onClick={nseScriptBtn} className="btn" >Upload</Button>
                                     <input
-                                        ref={inputFile3}
+                                        ref={nseScriptFileRef}
                                         type="file"
                                         accept=".csv"
                                         style={{ display: "none" }}
-                                        onChange={fileHandler3}
+                                        onChange={nseScriptFileHandler}
                                     />
                                 </TableCell>
                             </TableRow>
@@ -364,7 +363,7 @@ const Dashboard = () => {
                                     Summary for a day
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={btnHandler5} className="btn" >Download</Button>
+                                    <Button onClick={summaryBtn} className="btn" >Download</Button>
                                 </TableCell>
                             </TableRow>
                         </TableBody>

@@ -23,7 +23,6 @@ const Login = () => {
 
     const loginHandler = (e) => {
         e.preventDefault();
-        console.log("login handler");
 
         axios.post('https://reqres.in/api/login', userData)
         .then((res) => {
