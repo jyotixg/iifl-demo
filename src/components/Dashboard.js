@@ -16,13 +16,13 @@ const Dashboard = () => {
     const [authenticated, setAuthenticated] = useState(true);
     const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         const userToken = localStorage.getItem('token');
 
-        if(!userToken){
+        if (!userToken) {
             navigate('/login')
         }
-    },[])
+    }, [])
 
     const handleClick = () => {
         setOpen(true);
@@ -201,24 +201,24 @@ const Dashboard = () => {
 
     return (
         <>
-            {
-                (uploaded > 0 && uploaded < 100) &&
-                <Box marginTop={2} display="flex" width="100%" alignItems="center" justifyContent='center' gap="10px" >
-                    <Box style={{ width: "43%", marginBottom: "10px", marginLeft: "" }} >
-                        <LinearProgress
-                            className="custom-class"
-                            style={{ height: "20px", color: "black", marginLeft: "43px" }}
-                            variant="determinate"
-                            value={uploaded}
-                        />
-                    </Box>
-                    <Box>
-                        <Typography>
-                            {uploaded}%
-                        </Typography>
-                    </Box>
+            {/* {
+                (uploaded > 0 && uploaded < 100) && */}
+            <Box marginTop={2} display="flex" width="100%" alignItems="center" justifyContent='center' gap="10px" >
+                <Box style={{ width: "43%", marginLeft: "" }} >
+                    <LinearProgress
+                        className="custom-class"
+                        style={{ height: "20px", color: "black", marginLeft: "43px" }}
+                        variant="determinate"
+                        value={70}
+                    />
                 </Box>
-            }
+                <Box>
+                    <Typography>
+                        {70}%
+                    </Typography>
+                </Box>
+            </Box>
+            {/* } */}
 
             {/* {
                 uploadSuccess ?
