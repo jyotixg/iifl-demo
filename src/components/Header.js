@@ -1,6 +1,7 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import React from 'react'
-import logo from '../src/images/logo.svg';
+import { useNavigate } from 'react-router-dom'
+import logo from '../../src/images/logo.svg'
 
 const imgStyle = {
     img: {
@@ -18,6 +19,12 @@ const imgStyle = {
 }
 
 const Header = () => {
+    const navigate = useNavigate();
+   
+    const logoutHandler = () => {
+        navigate('/login');
+        localStorage.removeItem('token');
+    }
 
     return (
         <>
@@ -30,11 +37,16 @@ const Header = () => {
                 boxShadow="0 0 20px #80808099"
             >
                 <Box>
-                    <img style={imgStyle.img} src={logo} />
+                    <img style={imgStyle.img} src={logo} alt="iifl-logo" />
                 </Box>
 
                 <Box>
-                    <Typography style={imgStyle.title} color="#242056" fontWeight="800" >MUTUAL FUND</Typography>
+                    {
+                        localStorage.getItem('token') ?
+                        <Button className='btn' onClick={logoutHandler} >LOGOUT</Button>
+                        :
+                        <Typography style={imgStyle.title} color="#242056" fontWeight="800" >MUTUAL FUND</Typography>
+                    }
                 </Box>
             </Box>
         </>

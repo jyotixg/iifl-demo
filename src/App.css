@@ -1,62 +1,11 @@
-/* .main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 80px;
-}
-
-.table {
-  text-align: left;
-  border-collapse: collapse;
-}
-
-.table_row {
-  border: 1px solid black;
-}
-
-.title {
-  font-size: 20px;
-  color: black;
-  padding: 15px;
-}
-
-.btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: black;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 120px;
-}
-
-.inputfile {
-  display: none;
-}
-
-.table_data {
-  text-align: center;
-  width: 300px;
-}
-
-.custom-class > * { 
-  background-color:black !important;
-}
-.custom-class{background-color:grey !important;} */
-
-.App{
-  /* padding: 20px; */
-  /* border: 1px solid red; */
-  background: #E9EFF3;
+html {
+  background-color: #E9EFF3;
 }
 
 .table {
   width: 40%;
   margin-left: auto;
   margin-right: auto;
-  /* border: 1px solid grey; */
   margin-top: 15px;
   background-color: #fff;
 }
@@ -82,6 +31,7 @@
 .custom-class {
   background-color: #242056 !important;
 }
+
 .MuiSnackbar-anchorOriginTopCenter {
   top: 150px !important;
 }

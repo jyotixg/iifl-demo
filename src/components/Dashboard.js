@@ -1,7 +1,9 @@
 import { Alert, Box, Button, LinearProgress, Snackbar, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
-import './App.css';
+import { useNavigate } from 'react-router-dom';
+// import './App.css';
+import '../App.css';
 
 
 const Dashboard = () => {
@@ -11,6 +13,17 @@ const Dashboard = () => {
     const [uploaded, setUploaded] = useState(null);
     const [uploadSuccess, setUploadSuccess] = useState(false);
     const [open, setOpen] = React.useState(false);
+    const [authenticated, setAuthenticated] = useState(true);
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        const userToken = localStorage.getItem('token');
+        console.log(userToken, "userToken");
+
+        if(!userToken){
+            navigate('/login')
+        }
+    },[])
 
     const handleClick = () => {
         setOpen(true);
@@ -91,7 +104,7 @@ const Dashboard = () => {
     }
 
     const allowedExtensions = ["csv"];
-    const fileSize = 50000000;
+    const fileSize = 20000000;
     const fileHandler1 = (e) => {
         const inputFile = e.target.files[0];
         const fileExtension = inputFile?.type.split("/")[1];
@@ -104,7 +117,6 @@ const Dashboard = () => {
             alert("Please upload file less than 50 mb");
         }
         else {
-
             axios.post('https://reqres.in/api/users', formData, {
                 onUploadProgress: (data) => {
                     setUploaded(Math.round((data.loaded / data.total) * 100))
