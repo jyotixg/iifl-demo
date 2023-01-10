@@ -29,16 +29,28 @@ const Login = () => {
 
     const loginHandler = (e) => {
         e.preventDefault();
-
         axios.post('https://reqres.in/api/login', userData)
             .then((res) => {
+                // setIsLoading(true);
+                // setTimeout(() => {
+                //     window.alert("login successfull");
+                //     localStorage.setItem('token', res.data.token);
+                //     setIsLoading(false);
+                //     navigate('/dashboard');
+                // }, 3000);
+
+                localStorage.setItem('token', res.data.token);
                 setIsLoading(true);
-                setTimeout(() => {
-                    window.alert("login successfull");
-                    localStorage.setItem('token', res.data.token);
-                    setIsLoading(false);
-                    navigate('/dashboard');
-                }, 3000);
+                axios.get(`https://reqres.in/api/users?delay=3`)
+                    .then((res) => {
+                        console.log(res);
+                        window.alert("login successfull");
+                        setIsLoading(false);
+                        navigate('/dashboard');
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
             })
             .catch((err) => {
                 console.log(err, "err");
