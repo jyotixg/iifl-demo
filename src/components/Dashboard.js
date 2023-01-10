@@ -202,24 +202,24 @@ const Dashboard = () => {
 
     return (
         <>
-            {/* {
-                (uploaded > 0 && uploaded < 100) && */}
-            <Box marginTop={2} display="flex" width="100%" alignItems="center" justifyContent='center' gap="10px" >
-                <Box style={{ width: "43%", marginLeft: "" }} >
-                    <LinearProgress
-                        className="custom-class"
-                        style={{ height: "20px", color: "black", marginLeft: "43px" }}
-                        variant="determinate"
-                        value={70}
-                    />
+            {
+                (uploaded > 0 && uploaded < 100) &&
+                <Box marginTop={2} display="flex" width="100%" alignItems="center" justifyContent='center' gap="10px" >
+                    <Box style={{ width: "43%", marginLeft: "" }} >
+                        <LinearProgress
+                            className="custom-class"
+                            style={{ height: "20px", color: "black", marginLeft: "43px" }}
+                            variant="determinate"
+                            value={uploaded}
+                        />
+                    </Box>
+                    <Box>
+                        <Typography>
+                            {uploaded}%
+                        </Typography>
+                    </Box>
                 </Box>
-                <Box>
-                    <Typography>
-                        {70}%
-                    </Typography>
-                </Box>
-            </Box>
-            {/* } */}
+            }
 
             {/* {
                 uploadSuccess ?

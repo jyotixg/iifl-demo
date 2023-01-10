@@ -1,5 +1,5 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Box, Button, FilledInput, FormControl, IconButton, InputAdornment, InputLabel, TextField } from '@mui/material'
+import { Box, Button, FilledInput, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material'
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,12 @@ const Login = () => {
         email: "eve.holt@reqres.in",
         password: "cityslicka"
     })
+
+    // const [userData, setUserData] = useState({
+    //     email: "",
+    //     password: ""
+    // })
+    
     const navigate = useNavigate();
 
     const onChangeHandler = (e) => {
@@ -25,7 +31,7 @@ const Login = () => {
         e.preventDefault();
 
         axios.post('https://reqres.in/api/login', userData)
-        .then((res) => {
+            .then((res) => {
                 setIsLoading(true);
                 setTimeout(() => {
                     // window.alert("login successfull");
@@ -38,7 +44,7 @@ const Login = () => {
                 console.log(err, "err");
                 setIsLoading(true);
                 setTimeout(() => {
-                    
+
                     window.alert("login failed");
                     setIsLoading(false)
                 }, 2000);
@@ -62,27 +68,26 @@ const Login = () => {
                 }}
             >
                 <form onSubmit={loginHandler} className="form" >
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                    <FormControl sx={{ m: 1, width: '25ch' }} >
                         <TextField
-                            id="filled-search"
                             label="Email"
                             name="email"
                             type="email"
-                            variant="filled"
                             onChange={onChangeHandler}
                             value={userData.email}
                             required
                         />
                     </FormControl>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
-                        <InputLabel style={{ color: "#242056" }} htmlFor="filled-adornment-password">Password</InputLabel>
-                        <FilledInput
+
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <OutlinedInput
                             name="password"
                             onChange={onChangeHandler}
                             value={userData.password}
-                            id="filled-adornment-password"
-                            type={showPassword ? 'text' : 'password'}
                             required
+                            id="outlined-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -95,10 +100,12 @@ const Login = () => {
                                     </IconButton>
                                 </InputAdornment>
                             }
+                            label="Password"
                         />
                     </FormControl>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
-                        <Button type="submit" className='btn' >{isLoading ? "Please wait" : "Login"}</Button>
+
+                    <FormControl sx={{ m: 1, width: '25ch' }}>
+                        <Button className='loginBtn' type="submit" >{isLoading ? "Please wait" : "Login"}</Button>
                     </FormControl>
 
                 </form>
